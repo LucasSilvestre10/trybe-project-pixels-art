@@ -33,10 +33,15 @@ function reload() {
 
 function whiteBoard() {
   const board = document.querySelector('#pixel-board');
-  for (let index = 0; index < 25; index += 1) {
-    const box = document.createElement('div');
-    box.classList.toggle('pixel');
-    board.appendChild(box);
+  for (let index = 0; index < 5; index += 1) {
+    const line = document.createElement('div');
+    line.classList.toggle('line');
+    board.appendChild(line);
+    for (let index2 = 0; index2 < 5; index2 += 1) {
+      const box = document.createElement('div');
+      box.classList.toggle('pixel');
+      line.appendChild(box);
+    }
   }
 }
 

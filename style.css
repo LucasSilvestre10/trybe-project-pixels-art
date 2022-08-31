@@ -25,11 +25,15 @@
   background-color: green;
 }
 
-#pixel-board {
-  width: 5em;
-  height: 5em;
+.line {
+  display: flex;
 }
 
 .pixel {
   background-color: white;
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  display: inline-block;
+  gap: 1px;
 }
