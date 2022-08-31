@@ -6,6 +6,7 @@
 }
 
 #color-palette {
+  display: inline-block;
 }
 
 .black {
@@ -22,4 +23,13 @@
 
 .green {
   background-color: green;
+}
+
+#pixel-board {
+  width: 5em;
+  height: 5em;
+}
+
+.pixel {
+  background-color: white;
 }
