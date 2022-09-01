@@ -1,4 +1,5 @@
 const button = document.querySelector('button');
+const button2 = document.querySelector('clear');
 let selectColor = 'black';
 
 function generateColor() {
@@ -76,6 +77,13 @@ function paint(event) {
   console.log(event.target);
   const target = event.target;
   target.style.backgroundColor = `${selectColor}`;
+}
+
+function clearBoard() {
+  const pixel = document.getElementsByClassName('pixel');
+  for (let index = 0; index < pixel.length; index += 1) {
+    pixel[index].style.backgroundColor = 'white';
+  }
 }
 
 window.onload = function load() {
