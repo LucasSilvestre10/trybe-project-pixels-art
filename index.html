@@ -16,13 +16,13 @@
       <div>
         <button id="button-random-color">Cores aleatórias</button>
       </div>
-      <div id="color-palette">
-        <div id="box1" class="color black selected"></div>
-        <div id="box2" class="color red"></div>
-        <div id="box3" class="color blue"></div>
-        <div id="box4" class="color green"></div>
+      <div id="color-palette"  onclick="selectedColor(event)">
+        <div id="paletteColor1" class="color black selected"></div>
+        <div id="paletteColor2" class="color red"></div>
+        <div id="paletteColor3" class="color blue"></div>
+        <div id="paletteColor4" class="color green"></div>
       </div>
-      <div id="pixel-board" class="pixel-board"></div>
+      <div id="pixel-board" class="pixel-board" onclick="paint(event)"></div>
     </main>
     <script src="script.js" defer></script>
   </body>
