@@ -1,5 +1,4 @@
 const button = document.querySelector('button');
-const button2 = document.querySelector('clear');
 let selectColor = 'black';
 
 function generateColor() {
@@ -12,7 +11,6 @@ function generateColor() {
 
 function buttonRandomColors() {
   const colors = [];
-  //console.log(colors);
   const box = document.querySelectorAll('.color');
   for (let index = 1; index < box.length; index += 1) {
     const color = generateColor();
@@ -46,13 +44,20 @@ function reloadBoard() {
     }
   }
 }
-function whiteBoard() {
+function whiteBoard(size) {
+  const sizeBoard = JSON.parse(localStorage.getItem('boardSize'));
+  if (sizeBoard) {
+    document.getElementById('board-size').value = sizeBoard;
+    size = sizeBoard;
+  } else if (!size) {
+    size = 5;
+  }
   const board = document.querySelector('#pixel-board');
-  for (let index = 0; index < 5; index += 1) {
+  for (let index = 0; index < size; index += 1) {
     const line = document.createElement('div');
     line.classList.toggle('line');
     board.appendChild(line);
-    for (let index2 = 0; index2 < 5; index2 += 1) {
+    for (let index2 = 0; index2 < size; index2 += 1) {
       const box = document.createElement('div');
       box.classList.toggle('pixel');
       line.appendChild(box);
@@ -84,10 +89,12 @@ function selectedColor(event) {
 function saveBoard() {
   const save = [];
   const pixel = document.getElementsByClassName('pixel');
+  const size = document.getElementById('board-size').value;
   for (let index = 0; index < pixel.length; index += 1) {
     save.push(pixel[index].style.backgroundColor);
   }
   localStorage.setItem('pixelBoard', JSON.stringify(save));
+  localStorage.setItem('boardSize', JSON.stringify(size));
 }
 
 function paint(event) {
@@ -100,6 +107,32 @@ function clearBoard() {
   const pixel = document.getElementsByClassName('pixel');
   for (let index = 0; index < pixel.length; index += 1) {
     pixel[index].style.backgroundColor = 'white';
+  }
+}
+
+function generateBoard() {
+  const size = document.getElementById('board-size').value;
+  const line = document.getElementsByClassName('line');
+  if (size > 50) {
+    if (line) {
+      Array.from(line).forEach((element) => {
+        element.remove();
+      });
+    }
+    localStorage.setItem('boardSize', JSON.stringify(50));
+    localStorage.removeItem('pixelBoard');
+    whiteBoard(50);
+  } else if (size > 5) {
+    if (line) {
+      Array.from(line).forEach((element) => {
+        element.remove();
+      });
+    }
+    localStorage.setItem('boardSize', JSON.stringify(size));
+    localStorage.removeItem('pixelBoard');
+    whiteBoard(size);
+  } else {
+    alert('Board inválido!');
   }
 }
 
