@@ -12,7 +12,7 @@ function generateColor() {
 
 function buttonRandomColors() {
   const colors = [];
-  console.log(colors);
+  //console.log(colors);
   const box = document.querySelectorAll('.color');
   for (let index = 1; index < box.length; index += 1) {
     const color = generateColor();
@@ -27,7 +27,7 @@ function buttonRandomColors() {
 }
 button.onclick = buttonRandomColors;
 
-function reload() {
+function reloadPalette() {
   if (localStorage.getItem('colorPalette')) {
     const color = JSON.parse(localStorage.getItem('colorPalette'));
     const box = document.querySelectorAll('.color');
@@ -37,6 +37,15 @@ function reload() {
   }
 }
 
+function reloadBoard() {
+  if (localStorage.getItem('pixelBoard')) {
+    const color = JSON.parse(localStorage.getItem('pixelBoard'));
+    const pixel = document.getElementsByClassName('pixel');
+    for (let index = 0; index < pixel.length; index += 1) {
+      pixel[index].style.backgroundColor = `${color[index]}`;
+    }
+  }
+}
 function whiteBoard() {
   const board = document.querySelector('#pixel-board');
   for (let index = 0; index < 5; index += 1) {
@@ -72,11 +81,19 @@ function selectedColor(event) {
   }
 }
 
+function saveBoard() {
+  const save = [];
+  const pixel = document.getElementsByClassName('pixel');
+  for (let index = 0; index < pixel.length; index += 1) {
+    save.push(pixel[index].style.backgroundColor);
+  }
+  localStorage.setItem('pixelBoard', JSON.stringify(save));
+}
+
 function paint(event) {
-  console.log(selectColor);
-  console.log(event.target);
   const target = event.target;
   target.style.backgroundColor = `${selectColor}`;
+  saveBoard();
 }
 
 function clearBoard() {
@@ -87,6 +104,7 @@ function clearBoard() {
 }
 
 window.onload = function load() {
-  reload();
   whiteBoard();
+  reloadPalette();
+  reloadBoard();
 };
